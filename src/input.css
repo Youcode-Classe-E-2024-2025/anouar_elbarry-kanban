@@ -15,7 +15,7 @@ body {
 }
 
 .app_row {
-    @apply gap-4 p-4 border-b border-gray-200 dark:border-gray-700;
+    @apply  py-4 px-20 border-b border-gray-200 dark:border-gray-700;
 }
 
 .add_btn {
@@ -23,19 +23,22 @@ body {
 }
 
 .card {
-    @apply flex flex-col mt-10 gap-4 max-w-sm px-6 py-4 border rounded-lg shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700;
+    @apply min-w-72 flex flex-col mt-10 gap-4 max-w-sm px-6 py-4 border-2 rounded-lg shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700;
 }
 
 .card_head {
-    @apply flex justify-between items-center mb-4;
+    @apply flex justify-between items-center mb-4 border-b-2;
 }
 
 h2 {
     @apply font-semibold text-lg text-gray-800 dark:text-gray-200;
 }
+h4 { 
+    @apply  font-semibold text-black
+}
 
 .counter {
-    @apply text-xs rounded-full py-1 px-3 text-white bg-gray-600 dark:bg-gray-700;
+    @apply text-xs rounded-md py-1 px-3 text-white bg-gray-600 dark:bg-gray-700;
 }
 
 .list-container {
@@ -47,7 +50,7 @@ h2 {
 }
 
 .delet {
-    @apply focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg px-3 py-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
+    @apply  focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg px-3 py-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
 }
 
 .edit {
@@ -56,4 +59,10 @@ h2 {
 
 .del_edi {
     @apply flex gap-3;
+}
+li {
+    @apply border flex flex-col min-h-16 gap-4 p-4 ;
+}
+.fa-solid{
+    @apply cursor-pointer;
 }
