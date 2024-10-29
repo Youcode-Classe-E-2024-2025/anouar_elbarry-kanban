@@ -15,7 +15,7 @@ body {
 }
 
 .app_row {
-    @apply  py-4 px-20 border-b border-gray-200 dark:border-gray-700;
+    @apply  px-20 border-b border-gray-200 dark:border-gray-700;
 }
 
 .add_btn {
@@ -23,9 +23,11 @@ body {
 }
 
 .card {
-    @apply min-w-72 flex flex-col mt-10 gap-4 max-w-sm px-6 py-4 border-2 rounded-lg shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700;
+    @apply min-w-72 max-w-80 flex flex-col mt-10 gap-4 max-w-sm px-6 py-4 border-2 rounded-lg shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700 overflow-y-scroll ;
 }
-
+.card::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
 .card_head {
     @apply flex justify-between items-center mb-4 border-b-2;
 }
@@ -65,4 +67,13 @@ li {
 }
 .fa-solid{
     @apply cursor-pointer;
+}
+ #date {
+    @apply text-gray-400
+ }
+ .task{
+    @apply  border-l-4 border-l-red-600;
+ }
+#description {
+    @apply hidden	;
 }
