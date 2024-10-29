@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>to do list</title>
+</head>
+<body>
+    <!-- container -->
+    <div class="container">
+        <!-- the app -->
+        <div class="todo-app">
+           <!-- header of the app -->
+           <div class="app_row">
+            <button class="add_btn" id="add_one">add task +</button> 
+            <span id="search_bar"> 
+                <input type="search" name="search" id="search">
+                <i class="fa-solid fa-magnifying-glass" style="color: #080808;"></i>
+            </span>
+             <button class="add_btn" id="add_mult">add multiple +</button>
+           </div>
+           <div class="cards">
+            
+           
+            <!-- todo card -->
+            <div class="card todo">
+                <div class="card_head">
+                    <h2>to do</h2>
+                    <span id="counter">3</span>
+                </div>
+                <ul class="list-container">
+                    <li>
+                        <h4>This is task description </h4>
+                        <div class="app_footer">
+                            <p id="date"> Mars 3,2020</p>
+                            <span class="del_edi">
+                                  <button id="delet">delet</button>
+                                  <button id="edit">edit</button>
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>This is task description </h4>
+                        <div class="app_footer">
+                            <p id="date"> Mars 3,2020</p>
+                            <span class="del_edi">
+                                  <button id="delet">delet</button>
+                                  <button id="edit">edit</button>
+                            </span>
+                        </div>
+                    </li>
+                    </ul>
+             </div>
+             <!-- in progress card -->
+             <div class="card progress">
+                <div class="card_head">
+                    <h2>in progress</h2>
+                    <span id="counter">3</span>
+                </div>
+                <ul class="list-container">
+                    <li>
+                        <h4>This is task description </h4>
+                        <div class="app_footer">
+                            <p id="date"> Mars 3,2020</p>
+                            <span class="del_edi">
+                                  <button id="delet">delet</button>
+                                  <button id="edit">edit</button>
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>This is task description </h4>
+                        <div class="app_footer">
+                            <p id="date"> Mars 3,2020</p>
+                            <span class="del_edi">
+                                  <button id="delet">delet</button>
+                                  <button id="edit">edit</button>
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>This is task description </h4>
+                        <div class="app_footer">
+                            <p id="date"> Mars 3,2020</p>
+                            <span class="del_edi">
+                                  <button id="delet">delet</button>
+                                  <button id="edit">edit</button>
+                            </span>
+                        </div>
+                    </li>
+                    </ul>
+             </div>
+             <!-- done_card -->
+             <div class="card done">
+                <div class="card_head">
+                    <h2>to do</h2>
+                    <span id="counter">3</span>
+                </div>
+                <ul class="list-container">
+                <li>
+                    <h4>This is task description </h4>
+                    <div class="app_footer">
+                        <p id="date"> Mars 3,2020</p>
+                        <span class="del_edi">
+                              <button id="delet">delet</button>
+                              <button id="edit">edit</button>
+                        </span>
+                    </div>
+                </li>
+                </ul>
+              </div>
+              </div>
+           </div>
+        </div>
+</body>
+</html>
