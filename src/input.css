@@ -70,20 +70,16 @@ li {
  .task{
     @apply  border-l-4 border-l-red-600;
  }
-#description {
-    @apply hidden	;
-}
-
 
 /* Priority Level Borders */
 .priority-p1 {
-    border-left: 4px solid #ff4d4f; /* High priority (P1) - Red */
+    border-left: 4px solid #ff4d4f; /* (P1) */
 }
 
 .priority-p2 {
-    border-left: 4px solid #ffa940; /* Medium priority (P2) - Orange */
+    border-left: 4px solid #ffa940; /* (P2) */
 }
 
 .priority-p3 {
-    border-left: 4px solid #36cfc9; /* Low priority (P3) - Teal */
+    border-left: 4px solid #22ff00; /* (P3) */
 }

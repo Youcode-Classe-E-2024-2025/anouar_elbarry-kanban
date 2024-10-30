@@ -9,17 +9,32 @@ const todoCounter = document.getElementById("todo_counter");
 const progressCounter = document.getElementById("progress_counter");
 const doneCounter = document.getElementById("done_counter");
 
-addTask.addEventListener('click', () => {
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    container.classList.add('blur');
-});
+// Function to add hover effects to show/hide descriptions
+function addHoverEffect(listItem) {
+    listItem.addEventListener('mouseover', () => {
+        const descr = listItem.querySelector('.description');
+        descr.classList.remove('hidden');
+    });
+    listItem.addEventListener('mouseout', () => {
+        const descr = listItem.querySelector('.description');
+        descr.classList.add('hidden');
+    });
+}
+
+// Apply hover effect to all existing tasks
+document.querySelectorAll('li').forEach(addHoverEffect);
 
 // Cancel button to close the modal
 document.getElementById('cancel_btn').addEventListener('click', () => {
     modal.classList.add('hidden');
     modal.classList.remove('flex');
     container.classList.remove('blur');
+});
+
+addTask.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    container.classList.add('blur');
 });
 
 // Function to update all counters
@@ -75,7 +90,7 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
     newItem.classList.add("task-item", priorityClass);
     newItem.innerHTML = `
         <h4>${title}</h4>
-        <p id="description">${description}</p>
+        <p class="description hidden">${description}</p>
         <div class="app_footer">
             <p id="date">${new Date().toLocaleDateString()}</p>
             <span class="del_edi">
@@ -94,6 +109,9 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
         doneList.appendChild(newItem);
     }
 
+    // Add hover effect to new task
+    addHoverEffect(newItem);
+
     // Update counters
     updateCounters();
 
@@ -103,3 +121,6 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
     modal.classList.remove('flex');
     container.classList.remove('blur');
 });
+
+// Initial call to set task counts
+updateCounters();
