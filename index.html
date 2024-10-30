@@ -20,7 +20,7 @@
     style="background-image: url('assets/images/wallpaperflare.com_wallpaper\ \(10\).jpg')">
     <!-- container -->
     <!-- blur -->
-    <div class="container h-full bg-center bg-cover flex flex-col justify-center  blur">
+    <div class="container h-full bg-center bg-cover flex flex-col justify-center  ">
         <!-- header of the app -->
         <div class="app_row flex">
             <button
@@ -57,11 +57,11 @@
             <div class="card todo border-red-700">
                 <div class="card_head border-b-red-700">
                     <h2>to do</h2>
-                    <span class="counter" id="counter">3</span>
+                    <span class="counter" id="todo_counter">3</span>
                 </div>
-                <ul class="list-container">
-                    <li class="task ">
-                        <h4>Title </h4>
+                <ul id="todo_list" class="list-container">
+                    <li class="priority-p3 li" id="0">
+                        <h4>amrabet </h4>
                         <p id="description">this is the description</p>
                         <div class="app_footer">
                             <p id="date"> Mars 3,2020</p>
@@ -71,8 +71,8 @@
                             </span>
                         </div>
                     </li>
-                    <li>
-                        <h4>Title </h4>
+                    <li class="priority-p2 li" id="1">
+                        <h4>web </h4>
                         <p id="description">this is the description</p>
                         <div class="app_footer">
                             <p id="date"> Mars 3,2020</p>
@@ -88,11 +88,11 @@
             <div class="card progress border-yellow-400">
                 <div class="card_head border-b-yellow-400">
                     <h2>in progress</h2>
-                    <span class="counter" id="counter">3</span>
+                    <span class="counter" id="progress_counter">3</span>
                 </div>
-                <ul class="list-container">
-                    <li>
-                        <h4>Title </h4>
+                <ul id="in_progress_list" class="list-container">
+                    <li class="priority-p1 li" id="2">
+                        <h4>loop </h4>
                         <p id="description">this is the description</p>
                         <div class="app_footer">
                             <p id="date"> Mars 3,2020</p>
@@ -102,8 +102,8 @@
                             </span>
                         </div>
                     </li>
-                    <li>
-                        <h4>Title </h4>
+                    <li class="priority-p1 li" id="3">
+                        <h4>task brook </h4>
                         <p id="description">this is the description</p>
                         <div class="app_footer">
                             <p id="date"> Mars 3,2020</p>
@@ -113,8 +113,8 @@
                             </span>
                         </div>
                     </li>
-                    <li>
-                        <h4>Title </h4>
+                    <li class="priority-p3 li" id="4">
+                        <h4>gym </h4>
                         <p id="description">this is the description</p>
                         <div class="app_footer">
                             <p id="date"> Mars 3,2020</p>
@@ -130,11 +130,11 @@
             <div class="card done border-green-500">
                 <div class="card_head border-b-green-500">
                     <h2>done</h2>
-                    <span class="counter" id="counter">3</span>
+                    <span class="counter" id="done_counter">3</span>
                 </div>
-                <ul class="list-container">
-                    <li>
-                        <h4>Title </h4>
+                <ul id="done_list" class="list-container">
+                    <li class="priority-p2 li" id="5">
+                        <h4>change icons </h4>
                         <p id="description">this is the description</p>
                         <div class="app_footer">
                             <p id="date"> Mars 3,2020</p>
@@ -151,8 +151,8 @@
 
     </div>
     <!-- forms start -->
-    <div class=" absolute left-0 top-0 flex items-center justify-center w-full h-full ">
-        <form class="conf-modal min-w-96 bg-gray-400 p-4 rounded-sm md:p-5">
+    <div  class="modal absolute left-0 top-0 items-center justify-center w-full h-full hidden">
+        <form id="modalForm" class="conf-modal min-w-96 bg-gray-400 p-4 rounded-sm md:p-5">
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-2">
                     <label for="title"
@@ -167,20 +167,20 @@
                     <select id="status"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <option selected=""> Status</option>
-                        <option value="TV">Todo</option>
-                        <option value="PC">In progress</option>
-                        <option value="GA">Done</option>
+                        <option value="Todo">Todo</option>
+                        <option value="In progress">In progress</option>
+                        <option value="Done">Done</option>
                     </select>
                 </div>
                 <div class="col-span-2 sm:col-span-1">
-                    <label for="category"
+                    <label for="priority"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">priority</label>
-                    <select id="category"
+                    <select id="priority"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <option selected="">priority</option>
-                        <option value="TV">P1</option>
-                        <option value="PC">P2</option>
-                        <option value="GA">P3</option>
+                        <option value="P1">P1</option>
+                        <option value="P2">P2</option>
+                        <option value="P3">P3</option>
                     </select>
                 </div>
                 <div class="col-span-2">
@@ -214,7 +214,7 @@
                 Add new Task
             </button>
             <!-- cencel btn -->
-            <button type="submit"
+            <button type="button"
             class="text-white inline-flex items-center bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
             id="cancel_btn">
             
@@ -226,12 +226,9 @@
         </form>
     </div>
     <!-- forms end -->
-    <!-- </div>
-    </div> -->
-
-    <!-- end modal -->
 
     </div>
+    <script src="script/script.js"></script>
 </body>
 
 </html>

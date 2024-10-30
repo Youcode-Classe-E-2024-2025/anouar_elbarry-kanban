@@ -641,14 +641,6 @@ video {
   grid-column: span 2 / span 2;
 }
 
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-
-.col-span-1 {
-  grid-column: span 1 / span 1;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -722,28 +714,8 @@ video {
   width: 100%;
 }
 
-.w-32 {
-  width: 8rem;
-}
-
-.min-w-52 {
-  min-width: 13rem;
-}
-
-.min-w-72 {
-  min-width: 18rem;
-}
-
-.min-w-9 {
-  min-width: 2.25rem;
-}
-
 .min-w-96 {
   min-width: 24rem;
-}
-
-.max-w-96 {
-  max-width: 24rem;
 }
 
 .max-w-md {
@@ -839,9 +811,9 @@ video {
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 
-.bg-cyan-600 {
+.bg-gray-400 {
   --tw-bg-opacity: 1;
-  background-color: rgb(8 145 178 / var(--tw-bg-opacity));
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
 
 .bg-gray-50 {
@@ -849,23 +821,13 @@ video {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
-.bg-transparent {
-  background-color: transparent;
-}
-
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-}
-
-.bg-slate-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
-}
-
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+
+.bg-transparent {
+  background-color: transparent;
 }
 
 .bg-cover {
@@ -1019,11 +981,13 @@ body {
 .card {
   margin-top: 2.5rem;
   display: flex;
+  height: -moz-fit-content;
+  height: fit-content;
   min-width: 18rem;
   max-width: 24rem;
   flex-direction: column;
   gap: 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-radius: 0.5rem;
   border-width: 2px;
   --tw-bg-opacity: 1;
@@ -1044,11 +1008,6 @@ body {
     --tw-bg-opacity: 1;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity));
   }
-}
-
-.card::-webkit-scrollbar {
-  display: none;
-  /* Chrome, Safari, Opera */
 }
 
 .card_head {
@@ -1257,6 +1216,23 @@ li {
 
 #description {
   display: none;
+}
+
+/* Priority Level Borders */
+
+.priority-p1 {
+  border-left: 4px solid #ff4d4f;
+  /* High priority (P1) - Red */
+}
+
+.priority-p2 {
+  border-left: 4px solid #ffa940;
+  /* Medium priority (P2) - Orange */
+}
+
+.priority-p3 {
+  border-left: 4px solid #36cfc9;
+  /* Low priority (P3) - Teal */
 }
 
 .hover\:border-transparent:hover {
