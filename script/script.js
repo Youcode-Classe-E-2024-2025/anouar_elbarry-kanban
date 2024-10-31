@@ -112,6 +112,7 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
     // Add hover effect to new task
     addHoverEffect(newItem);
 
+    adddisplay
     // Update counters
     updateCounters();
 

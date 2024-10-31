@@ -706,6 +706,10 @@ video {
   width: 1.25rem;
 }
 
+.w-96 {
+  width: 24rem;
+}
+
 .w-\[250px\] {
   width: 250px;
 }
@@ -730,6 +734,10 @@ video {
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .items-center {
   align-items: center;
 }
@@ -744,6 +752,10 @@ video {
 
 .justify-evenly {
   justify-content: space-evenly;
+}
+
+.gap-12 {
+  gap: 3rem;
 }
 
 .gap-4 {
@@ -844,6 +856,11 @@ video {
 
 .p-4 {
   padding: 1rem;
+}
+
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 .px-4 {
@@ -984,10 +1001,11 @@ body {
   height: -moz-fit-content;
   height: fit-content;
   min-width: 18rem;
-  max-width: 24rem;
+  max-width: 18rem;
+  flex: 1 1 0%;
   flex-direction: column;
   gap: 1rem;
-  overflow-y: auto;
+  overflow: auto;
   border-radius: 0.5rem;
   border-width: 2px;
   --tw-bg-opacity: 1;
@@ -1195,6 +1213,7 @@ li {
   min-height: 4rem;
   flex-direction: column;
   gap: 1rem;
+  overflow-x: hidden;
   border-width: 1px;
   padding: 1rem;
 }
@@ -1212,6 +1231,11 @@ li {
   border-left-width: 4px;
   --tw-border-opacity: 1;
   border-left-color: rgb(220 38 38 / var(--tw-border-opacity));
+}
+
+.description {
+  overflow: hidden;
+  text-wrap: nowrap;
 }
 
 /* Priority Level Borders */

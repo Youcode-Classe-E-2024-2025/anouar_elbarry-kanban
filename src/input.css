@@ -22,7 +22,7 @@ body {
 }
 
 .card {
-    @apply min-w-72 h-fit flex flex-col mt-10 gap-4 max-w-sm px-6 py-4 border-2 rounded-lg shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700 overflow-y-auto ;
+    @apply flex-1 max-w-72  min-w-72 h-fit flex flex-col mt-10 gap-4  px-6 py-4 border-2 rounded-lg shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700 overflow-auto ;
 }
 .card_head {
     @apply flex justify-between items-center mb-4 border-b-2;
@@ -59,7 +59,7 @@ h4 {
     @apply flex gap-3;
 }
 li {
-    @apply border flex flex-col min-h-16 gap-4 p-4 ;
+    @apply border flex flex-col min-h-16 gap-4 p-4 overflow-x-hidden;
 }
 .fa-solid{
     @apply cursor-pointer;
@@ -70,7 +70,9 @@ li {
  .task{
     @apply  border-l-4 border-l-red-600;
  }
-
+.description {
+    @apply text-nowrap overflow-hidden;
+}
 /* Priority Level Borders */
 .priority-p1 {
     border-left: 4px solid #ff4d4f; /* (P1) */
