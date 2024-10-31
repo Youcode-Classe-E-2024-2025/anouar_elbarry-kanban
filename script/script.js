@@ -1,4 +1,4 @@
-// Data 
+// Data
 const tasks = [
     {
         id: 0,
@@ -13,7 +13,7 @@ const tasks = [
         title: "web",
         priority: "P2",
         status: "Todo",
-        dueDate: "24/21/2024",
+        dueDate: "12/24/2024", 
         description: "this is the description"
     },
     {
@@ -30,7 +30,7 @@ const tasks = [
         priority: "P1",
         status: "In Progress",
         dueDate: "03/13/2024",
-        description: "this is the descriptikjbiubuhyjvbuyhvuyhvuyvuvuvuyvuyvuyvuyvon"
+        description: "this is the description"
     },
     {
         id: 4,
@@ -50,21 +50,54 @@ const tasks = [
     }
 ];
 
-
-
-
 // Select DOM elements
 const addTask = document.querySelector('#add_one');
-const updateTask = document.querySelectorAll('li');
 const showTask = document.querySelector('.task-modal');
 const container = document.querySelector('.container');
 const modal = document.querySelector('.modal');
-const todoList = document.getElementById("todo_list"); // To Do list
-const progressList = document.getElementById("in_progress_list"); // In Progress list
-const doneList = document.getElementById("done_list"); // Done list
+const todoList = document.getElementById("todo_list");
+const progressList = document.getElementById("in_progress_list");
+const doneList = document.getElementById("done_list");
 const todoCounter = document.getElementById("todo_counter");
 const progressCounter = document.getElementById("progress_counter");
 const doneCounter = document.getElementById("done_counter");
+
+
+addTask.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    container.classList.add('blur');
+})
+const cancel_add = document.getElementById('cancel_btn');
+cancel_add.addEventListener('click', ()=> {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    container.classList.remove('blur');
+}
+
+)
+
+
+
+
+// Function to create a new task item
+function createTaskItem(task) {
+    const newItem = document.createElement("li");
+    newItem.classList.add("task-item", `priority-${task.priority}`);
+    newItem.innerHTML = `
+        <h4>${task.title}</h4>
+        <p class="description hidden">${task.description}</p>
+        <div class="app_footer">
+            <p id="date">${task.dueDate}</p>
+            <span class="del_edi">
+                <i class="fa-solid fa-trash" style="color: #000000;"></i>
+                <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+            </span>
+        </div>
+    `;
+    addHoverEffect(newItem);
+    return newItem;
+}
 
 // Function to add hover effects to show/hide descriptions
 function addHoverEffect(listItem) {
@@ -77,40 +110,6 @@ function addHoverEffect(listItem) {
         descr.classList.add('hidden');
     });
 }
-// update task
-
-document.getElementById('cancel_btn_update').addEventListener('click', () => {
-    showTask.classList.add('hidden');
-    showTask.classList.remove('flex');
-    container.classList.remove('blur');
-});
-const wright = document.querySelectorAll('.fa-pen-to-square');
-wright.forEach(icon => {
-        icon.addEventListener('click', () => {
-        showTask.classList.remove('hidden');
-        showTask.classList.add('flex');
-        container.classList.add('blur');
-    });
-});
-  
-
-
-
-// Apply hover effect to all existing tasks
-document.querySelectorAll('li').forEach(addHoverEffect);
-
-// Cancel button to close the modal
-document.getElementById('cancel_btn').addEventListener('click', () => {
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    container.classList.remove('blur');
-});
-
-addTask.addEventListener('click', () => {
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    container.classList.add('blur');
-});
 
 // Function to update all counters
 function updateCounters() {
@@ -119,18 +118,25 @@ function updateCounters() {
     doneCounter.textContent = doneList.querySelectorAll('li').length;
 }
 
+// Add tasks to the DOM initially
+tasks.forEach(task => {
+    const newItem = createTaskItem(task);
+    if (task.status === "Todo") {
+        todoList.appendChild(newItem);
+    } else if (task.status === "In Progress") {
+        progressList.appendChild(newItem);
+    } else if (task.status === "Done") {
+        doneList.appendChild(newItem);
+    }
+});
+
 // Event delegation for handling trash icon clicks
 container.addEventListener('click', function(event) {
     if (event.target.classList.contains('fa-trash')) {
-        // Remove the task
         const listItem = event.target.closest('li');
-        const parentList = listItem.parentElement;
-
-        // Remove the list item
         listItem.remove();
-        
-        // Update counters after removal
         updateCounters();
+        alert("Task deleted successfully!"); // User feedback
     }
 });
 
@@ -138,11 +144,18 @@ container.addEventListener('click', function(event) {
 document.getElementById("submit_btn").addEventListener("click", function(event) {
     event.preventDefault();
 
-    // Get form values
     const title = document.getElementById("title_add").value.trim();
     const description = document.getElementById("message").value.trim();
-    const priority = document.getElementById("priority").value; // Get the selected priority
+    const priority = document.getElementById("priority").value; 
     const status = document.getElementById("status").value;
+    const dueDate = document.getElementById("dueDate").value.trim();
+
+    // Due date validation
+    const dueDatePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])\/\d{4}$/;
+    if (!dueDatePattern.test(dueDate) || !isValidDate(dueDate)) {
+        alert("Please enter a valid due date in mm/dd/yyyy format.");
+        return;
+    }
 
     // Validate input fields
     if (!title || !description || priority === "" || status === "") {
@@ -150,56 +163,46 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
         return;
     }
 
-    // Determine the priority class
-    let priorityClass;
-    if (priority === "P1") {
-        priorityClass = "priority-p1"; // Corresponding class for priority P1
-    } else if (priority === "P2") {
-        priorityClass = "priority-p2"; // Corresponding class for priority P2
-    } else if (priority === "P3") {
-        priorityClass = "priority-p3"; // Corresponding class for priority P3
-    }
-    // Add the new task to the data
-    
-    
+    // Create a new task object
+    const newTask = {
+        id: tasks.length,
+        title,
+        priority,
+        status,
+        dueDate,
+        description
+    };
 
-    // Create a new list item with the selected priority class
-    const newItem = document.createElement("li");
-    newItem.classList.add("task-item", priorityClass);
-    newItem.innerHTML = `
-        <h4>${title}</h4>
-        <p class="description hidden">${description}</p>
-        <div class="app_footer">
-            <p id="date">${new Date().toLocaleDateString()}</p>
-            <span class="del_edi">
-                <i class="fa-solid fa-trash" style="color: #000000;"></i>
-                <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-            </span>
-        </div>
-    `;
+    tasks.push(newTask);
 
-    // Append the new item to the appropriate list based on the status
+    // Create a new list item and append it
+    const newItem = createTaskItem(newTask);
     if (status === "Todo") {
         todoList.appendChild(newItem);
-    } else if (status === "In progress") {
+    } else if (status === "In Progress") {
         progressList.appendChild(newItem);
     } else if (status === "Done") {
         doneList.appendChild(newItem);
     }
 
-    // Add hover effect to new task
-    addHoverEffect(newItem);
-
-    adddisplay
-    // Update counters
     updateCounters();
+    alert("Task added successfully!"); // User feedback
 
-    // Reset form fields and close modal
     document.getElementById("modalForm").reset();
     modal.classList.add('hidden');
     modal.classList.remove('flex');
     container.classList.remove('blur');
 });
+
+// Helper function to validate dates
+function isValidDate(dateString) {
+    const dateParts = dateString.split('/');
+    const month = parseInt(dateParts[0], 10);
+    const day = parseInt(dateParts[1], 10);
+    const year = parseInt(dateParts[2], 10);
+    const date = new Date(year, month - 1, day);
+    return date.getFullYear() === year && date.getMonth() + 1 === month && date.getDate() === day;
+}
 
 // Initial call to set task counts
 updateCounters();
