@@ -1,5 +1,62 @@
+// Data 
+const tasks = [
+    {
+        id: 0,
+        title: "amrabet",
+        priority: "P3",
+        status: "Todo",
+        dueDate: "04/12/2024",
+        description: "this is the description"
+    },
+    {
+        id: 1,
+        title: "web",
+        priority: "P2",
+        status: "Todo",
+        dueDate: "24/21/2024",
+        description: "this is the description"
+    },
+    {
+        id: 2,
+        title: "loop",
+        priority: "P1",
+        status: "In Progress",
+        dueDate: "03/03/2020",
+        description: "this is the description"
+    },
+    {
+        id: 3,
+        title: "task brook",
+        priority: "P1",
+        status: "In Progress",
+        dueDate: "03/13/2024",
+        description: "this is the descriptikjbiubuhyjvbuyhvuyhvuyvuvuvuyvuyvuyvuyvon"
+    },
+    {
+        id: 4,
+        title: "gym",
+        priority: "P3",
+        status: "In Progress",
+        dueDate: "07/05/2024",
+        description: "this is the description"
+    },
+    {
+        id: 5,
+        title: "change icons",
+        priority: "P2",
+        status: "Done",
+        dueDate: "01/23/2028",
+        description: "this is the description"
+    }
+];
+
+
+
+
 // Select DOM elements
 const addTask = document.querySelector('#add_one');
+const updateTask = document.querySelectorAll('li');
+const showTask = document.querySelector('.task-modal');
 const container = document.querySelector('.container');
 const modal = document.querySelector('.modal');
 const todoList = document.getElementById("todo_list"); // To Do list
@@ -20,6 +77,24 @@ function addHoverEffect(listItem) {
         descr.classList.add('hidden');
     });
 }
+// update task
+
+document.getElementById('cancel_btn_update').addEventListener('click', () => {
+    showTask.classList.add('hidden');
+    showTask.classList.remove('flex');
+    container.classList.remove('blur');
+});
+const wright = document.querySelectorAll('.fa-pen-to-square');
+wright.forEach(icon => {
+        icon.addEventListener('click', () => {
+        showTask.classList.remove('hidden');
+        showTask.classList.add('flex');
+        container.classList.add('blur');
+    });
+});
+  
+
+
 
 // Apply hover effect to all existing tasks
 document.querySelectorAll('li').forEach(addHoverEffect);
@@ -84,6 +159,9 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
     } else if (priority === "P3") {
         priorityClass = "priority-p3"; // Corresponding class for priority P3
     }
+    // Add the new task to the data
+    
+    
 
     // Create a new list item with the selected priority class
     const newItem = document.createElement("li");
