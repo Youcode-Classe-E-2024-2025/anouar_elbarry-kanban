@@ -20,7 +20,7 @@ const tasks = [
         id: 2,
         title: "loop",
         priority: "P1",
-        status: "In Progress",
+        status: "In progress",
         dueDate: "03/03/2020",
         description: "this is the description"
     },
@@ -28,7 +28,7 @@ const tasks = [
         id: 3,
         title: "task brook",
         priority: "P1",
-        status: "In Progress",
+        status: "In progress",
         dueDate: "03/13/2024",
         description: "this is the description"
     },
@@ -36,7 +36,7 @@ const tasks = [
         id: 4,
         title: "gym",
         priority: "P3",
-        status: "In Progress",
+        status: "In progress",
         dueDate: "07/05/2024",
         description: "this is the description"
     },
@@ -62,6 +62,7 @@ const todoCounter = document.getElementById("todo_counter");
 const progressCounter = document.getElementById("progress_counter");
 const doneCounter = document.getElementById("done_counter");
 
+// show the modal (add task)
 
 addTask.addEventListener('click', () => {
     modal.classList.remove('hidden');
@@ -123,7 +124,7 @@ tasks.forEach(task => {
     const newItem = createTaskItem(task);
     if (task.status === "Todo") {
         todoList.appendChild(newItem);
-    } else if (task.status === "In Progress") {
+    } else if (task.status === "In progress") {
         progressList.appendChild(newItem);
     } else if (task.status === "Done") {
         doneList.appendChild(newItem);
@@ -148,14 +149,14 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
     const description = document.getElementById("message").value.trim();
     const priority = document.getElementById("priority").value; 
     const status = document.getElementById("status").value;
-    const dueDate = document.getElementById("dueDate").value.trim();
+    const dueDate = document.getElementById("due_date").value.trim();
 
     // Due date validation
-    const dueDatePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])\/\d{4}$/;
-    if (!dueDatePattern.test(dueDate) || !isValidDate(dueDate)) {
-        alert("Please enter a valid due date in mm/dd/yyyy format.");
-        return;
-    }
+    // const dueDatePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])\/\d{4}$/;
+    // if (!dueDatePattern.test(dueDate) || !isValidDate(dueDate)) {
+    //     alert("Please enter a valid due date in mm/dd/yyyy format.");
+    //     return;
+    // }
 
     // Validate input fields
     if (!title || !description || priority === "" || status === "") {
@@ -174,12 +175,13 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
     };
 
     tasks.push(newTask);
+    console.log(newTask);
 
     // Create a new list item and append it
     const newItem = createTaskItem(newTask);
     if (status === "Todo") {
         todoList.appendChild(newItem);
-    } else if (status === "In Progress") {
+    } else if (status === "In progress") {
         progressList.appendChild(newItem);
     } else if (status === "Done") {
         doneList.appendChild(newItem);
@@ -187,6 +189,7 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
 
     updateCounters();
     alert("Task added successfully!"); // User feedback
+    createTaskItem(newTask);
 
     document.getElementById("modalForm").reset();
     modal.classList.add('hidden');
