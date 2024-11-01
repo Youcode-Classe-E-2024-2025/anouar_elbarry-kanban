@@ -77,24 +77,58 @@ cancel_add.addEventListener('click', () => {
     container.classList.remove('blur');
 });
 
-// Create new task item
+// Function to create a new task item with status dropdown
 function createTaskItem(task) {
     const newItem = document.createElement("li");
     newItem.classList.add("task-item", `priority-${task.priority}`);
+    newItem.setAttribute("id", `task-${task.id}`);
     newItem.innerHTML = `
         <h4>${task.title}</h4>
         <p class="description hidden">${task.description}</p>
         <div class="app_footer">
             <p id="date">${task.dueDate}</p>
+            <select class="status-dropdown">
+                <option value="Todo" ${task.status === "Todo" ? "selected" : ""}>Todo</option>
+                <option value="In progress" ${task.status === "In progress" ? "selected" : ""}>In progress</option>
+                <option value="Done" ${task.status === "Done" ? "selected" : ""}>Done</option>
+            </select>
             <span class="del_edi">
                 <i class="fa-solid fa-trash" style="color: #000000;"></i>
-                <i class="fa-solid fa-pen-to-square" style="color: #000000;" data-id="${task.id}"></i>
+                <i data-id="${task.id}" class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
             </span>
         </div>
     `;
     addHoverEffect(newItem);
+    addStatusChangeHandler(newItem, task); // Add status change handler
     return newItem;
 }
+
+// Function to add status change handler
+function addStatusChangeHandler(listItem, task) {
+    const statusDropdown = listItem.querySelector(".status-dropdown");
+    statusDropdown.addEventListener("change", () => {
+        task.status = statusDropdown.value;
+        moveTaskToCorrectList(listItem, task);
+        updateCounters(); // Update the counters after moving the task
+    });
+}
+
+// Function to move task to the correct list based on status
+function moveTaskToCorrectList(listItem, task) {
+    // Remove task from current list
+    listItem.remove();
+
+    // Add task to the correct list based on its new status
+    if (task.status === "Todo") {
+        todoList.appendChild(listItem);
+    } else if (task.status === "In progress") {
+        progressList.appendChild(listItem);
+    } else if (task.status === "Done") {
+        doneList.appendChild(listItem);
+    }
+}
+
+
 
 // Add hover effects
 function addHoverEffect(listItem) {
