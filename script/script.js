@@ -50,6 +50,7 @@ const tasks = [
     }
 ];
 
+
 // Select DOM elements
 const addTask = document.querySelector('#add_one');
 const container = document.querySelector('.container');
@@ -62,22 +63,21 @@ const todoCounter = document.getElementById("todo_counter");
 const progressCounter = document.getElementById("progress_counter");
 const doneCounter = document.getElementById("done_counter");
 
-// show the modal (add task)
-
+// Show modal (add task)
 addTask.addEventListener('click', () => {
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     container.classList.add('blur');
-})
+});
+
 const cancel_add = document.getElementById('cancel_btn');
-cancel_add.addEventListener('click', ()=> {
+cancel_add.addEventListener('click', () => {
     modal.classList.add('hidden');
     modal.classList.remove('flex');
     container.classList.remove('blur');
 });
 
-
-// Function to create a new task item
+// Create new task item
 function createTaskItem(task) {
     const newItem = document.createElement("li");
     newItem.classList.add("task-item", `priority-${task.priority}`);
@@ -88,7 +88,7 @@ function createTaskItem(task) {
             <p id="date">${task.dueDate}</p>
             <span class="del_edi">
                 <i class="fa-solid fa-trash" style="color: #000000;"></i>
-                <i data-id="${task.id}" class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                <i class="fa-solid fa-pen-to-square" style="color: #000000;" data-id="${task.id}"></i>
             </span>
         </div>
     `;
@@ -96,26 +96,24 @@ function createTaskItem(task) {
     return newItem;
 }
 
-// Function to add hover effects to show/hide descriptions
+// Add hover effects
 function addHoverEffect(listItem) {
     listItem.addEventListener('mouseover', () => {
-        const descr = listItem.querySelector('.description');
-        descr.classList.remove('hidden');
+        listItem.querySelector('.description').classList.remove('hidden');
     });
     listItem.addEventListener('mouseout', () => {
-        const descr = listItem.querySelector('.description');
-        descr.classList.add('hidden');
+        listItem.querySelector('.description').classList.add('hidden');
     });
 }
 
-// Function to update all counters
+// Update counters
 function updateCounters() {
     todoCounter.textContent = todoList.querySelectorAll('li').length;
     progressCounter.textContent = progressList.querySelectorAll('li').length;
     doneCounter.textContent = doneList.querySelectorAll('li').length;
 }
 
-// Add tasks to the DOM initially
+// Add tasks to DOM initially
 tasks.forEach(task => {
     const newItem = createTaskItem(task);
     if (task.status === "Todo") {
@@ -126,34 +124,32 @@ tasks.forEach(task => {
         doneList.appendChild(newItem);
     }
 });
+updateCounters();
 
-// Event delegation for handling trash icon clicks
+// Event delegation for delete functionality
 container.addEventListener('click', function(event) {
     if (event.target.classList.contains('fa-trash')) {
-        const listItem = event.target.closest('li');
-        listItem.remove();
+        event.target.closest('li').remove();
         updateCounters();
-        alert("Task deleted successfully!"); // User feedback
+        alert("Task deleted successfully!");
     }
 });
 
-// Add new task when the submit button is clicked
+// Add new task
 document.getElementById("submit_btn").addEventListener("click", function(event) {
     event.preventDefault();
-
+    
     const title = document.getElementById("title_add").value.trim();
     const description = document.getElementById("description").value.trim();
-    const priority = document.getElementById("priority").value; 
+    const priority = document.getElementById("priority").value;
     const status = document.getElementById("status").value;
     const dueDate = document.getElementById("due_date").value.trim();
 
-    // Validate input fields
-    if (!title || !description || priority === "" || status === "") {
+    if (!title || !description || !priority || !status || !dueDate) {
         alert("Please fill out all fields.");
         return;
     }
 
-    // Create a new task object
     const newTask = {
         id: tasks.length,
         title,
@@ -162,11 +158,8 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
         dueDate,
         description
     };
-
     tasks.push(newTask);
-    console.log(newTask);
 
-    // Create a new list item and append it
     const newItem = createTaskItem(newTask);
     if (status === "Todo") {
         todoList.appendChild(newItem);
@@ -177,100 +170,62 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
     }
 
     updateCounters();
-    alert("Task added successfully!"); // User feedback
-    createTaskItem(newTask);
-
+    alert("Task added successfully!");
     document.getElementById("modalForm").reset();
     modal.classList.add('hidden');
     modal.classList.remove('flex');
     container.classList.remove('blur');
 });
 
-// Helper function to validate dates
-function isValidDate(dateString) {
-    const dateParts = dateString.split('/');
-    const month = parseInt(dateParts[0], 10);
-    const day = parseInt(dateParts[1], 10);
-    const year = parseInt(dateParts[2], 10);
-    const date = new Date(year, month - 1, day);
-    return date.getFullYear() === year && date.getMonth() + 1 === month && date.getDate() === day;
-}
-
-// Initial call to set task counts
-updateCounters();
-
-// update task
-
-// Event delegation for handling edit icon clicks
+// Handle task edit
 let itemId;
 container.addEventListener('click', function(event) {
     if (event.target.classList.contains('fa-pen-to-square')) {
-        
-        // show modal update
         updateModal.classList.remove('hidden');
         updateModal.classList.add('flex');
         container.classList.add('blur');
         
-        // Get the specific item ID
         itemId = parseInt(event.target.dataset.id, 10);
-        console.log('Editing item with ID:', itemId); // Debugging line to see if we have the correct ID
-     
-        const taskToEdit =  tasks.find(task => task.id === itemId);
-        if(taskToEdit) {
+        const taskToEdit = tasks.find(task => task.id === itemId);
+        
+        if (taskToEdit) {
             document.getElementById("description_update").value = taskToEdit.description;
             document.getElementById("priority_update").value = taskToEdit.priority;
             document.getElementById("due_date_update").value = taskToEdit.dueDate;
         }
-   
-}
+    }
 });
 
-const update_btn = document.getElementById('submit_btn_update');
-update_btn.addEventListener('click', function(event) {
-    
-   const description = document.getElementById("description_update").value.trim();
-   const priority = document.getElementById("priority_update").value; 
-   const dueDate = document.getElementById("due_date_update").value;
-   
+// Update task
+document.getElementById('submit_btn_update').addEventListener('click', function() {
+    const description = document.getElementById("description_update").value.trim();
+    const priority = document.getElementById("priority_update").value;
+    const dueDate = document.getElementById("due_date_update").value.trim();
 
-   const listItem = event.target.closest('li');
-    listItem.remove();
-   if(!description || !priority || !dueDate){
-    alert('please fill out all fialds ');
-    return;
-   }
+    if (!description || !priority || !dueDate) {
+        alert('Please fill out all fields');
+        return;
+    }
 
-//    finde and update specific task
-const taskToUpdate =  tasks.find(task => task.id === itemId);
+    const taskToUpdate = tasks.find(task => task.id === itemId);
+    if (taskToUpdate) {
+        taskToUpdate.description = description;
+        taskToUpdate.priority = priority;
+        taskToUpdate.dueDate = dueDate;
 
-if(taskToUpdate){
-    taskToUpdate.description = description;
-    taskToUpdate.priority = priority;
-    taskToUpdate.dueDate = dueDate;
+        const updatedItem = createTaskItem(taskToUpdate);
+        document.querySelector(`[data-id="${itemId}"]`).closest('li').replaceWith(updatedItem);
+        updateCounters();
+    }
 
-     // Re-render task item in the DOM
-     const updatedItem = createTaskItem(taskToUpdate); // Creates the updated DOM element
-     const listItem = document.querySelector(`[data-id="${itemId}"]`); // Find the existing item in DOM
-     listItem.replaceWith(updatedItem); // Replace the old item with the updated one
-     updateCounters(); // Update counters
-
-}
-
-    
-// hide the modal 
     updateModal.classList.add('hidden');
     updateModal.classList.remove('flex');
     container.classList.remove('blur');
+});
 
-    console.log(tasks);
-
-} );
-
- // hidde modal update
- const cancel_btn_update = document.getElementById('cancel_btn_update');
- cancel_btn_update.addEventListener('click', () => {
-
- updateModal.classList.add('hidden');
- updateModal.classList.remove('flex');
- container.classList.remove('blur');
- });
+// Hide update modal
+document.getElementById('cancel_btn_update').addEventListener('click', () => {
+    updateModal.classList.add('hidden');
+    updateModal.classList.remove('flex');
+    container.classList.remove('blur');
+});
