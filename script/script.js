@@ -52,7 +52,6 @@ const tasks = [
 
 // Select DOM elements
 const addTask = document.querySelector('#add_one');
-const showTask = document.querySelector('.task-modal');
 const container = document.querySelector('.container');
 const modal = document.querySelector('.modal');
 const todoList = document.getElementById("todo_list");
@@ -209,3 +208,28 @@ function isValidDate(dateString) {
 
 // Initial call to set task counts
 updateCounters();
+
+// update task
+
+// Event delegation for handling edit icon clicks
+container.addEventListener('click', function(event) {
+    if (event.target.classList.contains('fa-pen-to-square')) {
+        
+        // show modal update
+        const updateModal = document.querySelector('.task-modal');
+        updateModal.classList.remove('hidden');
+        updateModal.classList.add('flex');
+        container.classList.add('blur');
+        
+        // hidde modal update
+        const cancel_btn_update = document.getElementById('cancel_btn_update');
+        cancel_btn_update.addEventListener('click', () => {
+
+        updateModal.classList.add('hidden');
+        updateModal.classList.remove('flex');
+        container.classList.remove('blur');
+        })
+
+        // alert("Task deleted successfully!"); // User feedback
+    }
+});
