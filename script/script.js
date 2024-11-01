@@ -229,7 +229,21 @@ container.addEventListener('click', function(event) {
         updateModal.classList.remove('flex');
         container.classList.remove('blur');
         })
+        const update_btn = document.getElementById('submit_btn_update');
+        update_btn.addEventListener('click', () => {
+            // event.preventDefault();
+            
+           const description = document.getElementById("message").value.trim();
+           const priority = document.getElementById("priority").value; 
+           const dueDate = document.getElementById("due_date").value.trim();
 
+           if(!description || priority === "" || !dueDate){
+            alert('please fill out all fialds ');
+           };
+           
+            
+
+        } )   
         // alert("Task deleted successfully!"); // User feedback
     }
 });
