@@ -5,7 +5,7 @@ const tasks = [
         title: "amrabet",
         priority: "P3",
         status: "Todo",
-        dueDate: "04/12/2024",
+        dueDate: "2024-04-12", 
         description: "this is the description"
     },
     {
@@ -13,7 +13,7 @@ const tasks = [
         title: "web",
         priority: "P2",
         status: "Todo",
-        dueDate: "12/24/2024", 
+        dueDate: "2024-12-24",
         description: "this is the description"
     },
     {
@@ -21,7 +21,7 @@ const tasks = [
         title: "loop",
         priority: "P1",
         status: "In progress",
-        dueDate: "03/03/2020",
+        dueDate: "2020-03-03", 
         description: "this is the description"
     },
     {
@@ -29,7 +29,7 @@ const tasks = [
         title: "task brook",
         priority: "P3",
         status: "In progress",
-        dueDate: "03/13/2024",
+        dueDate: "2024-03-13", 
         description: "this is the description"
     },
     {
@@ -37,7 +37,7 @@ const tasks = [
         title: "gym",
         priority: "P2",
         status: "In progress",
-        dueDate: "07/05/2024",
+        dueDate: "2024-07-05",
         description: "this is the description"
     },
     {
@@ -45,10 +45,11 @@ const tasks = [
         title: "change icons",
         priority: "P2",
         status: "Done",
-        dueDate: "01/23/2028",
+        dueDate: "2028-01-23",
         description: "this is the description this is the description this is the description this is the description this is the descriptionthis is the description"
     }
 ];
+
 
 // Select DOM elements
 const addTask = document.querySelector('#add_one');
@@ -319,8 +320,8 @@ function sortTasks() {
         if (a.priority !== b.priority) {
             return a.priority.localeCompare(b.priority);
         }
-        const dateA = new Date(a.dueDate.split('/').reverse().join('-'));
-        const dateB = new Date(b.dueDate.split('/').reverse().join('-'));
+        const dateA = new Date(a.dueDate);
+        const dateB = new Date(b.dueDate);
         return dateA - dateB;
     });
 }

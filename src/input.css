@@ -18,11 +18,11 @@ body {
 }
 
 .add_btn {
-    @apply flex items-center justify-center rounded-lg py-2 px-4 text-sm font-semibold;
+    @apply flex items-center justify-center rounded-lg py-2 px-4 text-sm font-semibold hover:ease-in-out duration-500;
 }
 
 .card {
-    @apply flex-1 max-w-72  min-w-72 h-fit flex flex-col mt-10 gap-4  px-6 py-4 border-2 rounded-lg shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700 overflow-auto ;
+    @apply flex-1 max-w-72  min-w-72 h-fit flex flex-col mt-10 gap-4  px-6 py-4 border-2 rounded-lg shadow-lg bg-white dark:bg-gray-800 dark:border-gray-700 ;
 }
 .card_head {
     @apply flex justify-between items-center mb-4 border-b-2;
@@ -35,40 +35,30 @@ h4 {
     @apply  font-semibold text-black
 }
 
+.del_edi {
+    @apply flex gap-3;
+}
+
 .counter {
     @apply text-xs rounded-md py-1 px-3 text-white bg-gray-600 dark:bg-gray-700;
 }
 
 .list-container {
-    @apply space-y-4 text-sm text-gray-700 dark:text-gray-300;
+    @apply space-y-4 text-sm text-gray-700 dark:text-gray-300 ;
 }
 
 .app_footer {
     @apply flex justify-between items-center text-xs text-gray-500 dark:text-gray-400;
 }
 
-.delet {
-    @apply  focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg px-3 py-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
-}
-
-.edit {
-    @apply focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg px-3 py-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900;
-}
-
-.del_edi {
-    @apply flex gap-3;
-}
 li {
-    @apply border flex flex-col min-h-16 gap-4 p-4 overflow-x-hidden;
+    @apply border flex flex-col min-h-16 gap-4 p-4 overflow-x-hidden transform hover:scale-105 duration-300;
 }
 .fa-solid{
-    @apply cursor-pointer;
+    @apply cursor-pointer ;
 }
  #date {
     @apply text-gray-400
- }
- .task{
-    @apply  border-l-4 border-l-red-600;
  }
 .description {
     @apply text-nowrap overflow-hidden;
