@@ -27,7 +27,7 @@ const tasks = [
     {
         id: 3,
         title: "task brook",
-        priority: "P1",
+        priority: "P3",
         status: "In progress",
         dueDate: "03/13/2024",
         description: "this is the description"
@@ -35,7 +35,7 @@ const tasks = [
     {
         id: 4,
         title: "gym",
-        priority: "P3",
+        priority: "P2",
         status: "In progress",
         dueDate: "07/05/2024",
         description: "this is the description"
@@ -49,7 +49,6 @@ const tasks = [
         description: "this is the description this is the description this is the description this is the description this is the descriptionthis is the description"
     }
 ];
-
 
 // Select DOM elements
 const addTask = document.querySelector('#add_one');
@@ -202,7 +201,7 @@ document.getElementById("submit_btn").addEventListener("click", function(event) 
     } else if (status === "Done") {
         doneList.appendChild(newItem);
     }
-
+    renderSortedTasks();
     updateCounters();
     alert("Task added successfully!");
     document.getElementById("modalForm").reset();
@@ -249,12 +248,14 @@ document.getElementById('submit_btn_update').addEventListener('click', function(
 
         const updatedItem = createTaskItem(taskToUpdate);
         document.querySelector(`[data-id="${itemId}"]`).closest('li').replaceWith(updatedItem);
+        renderSortedTasks();
         updateCounters();
     }
 
     updateModal.classList.add('hidden');
     updateModal.classList.remove('flex');
     container.classList.remove('blur');
+    
 });
 
 // Hide update modal
@@ -309,4 +310,45 @@ xMark.addEventListener('click', () => {
        container.classList.remove('blur');
 
        taskInfo.classList.remove('p1_info', 'p2_info', 'p3_info');
-})
+});
+// Minor improvements and organization for clarity and performance
+
+// Sort tasks by priority and due date (ascending)
+function sortTasks() {
+    tasks.sort((a, b) => {
+        if (a.priority !== b.priority) {
+            return a.priority.localeCompare(b.priority);
+        }
+        const dateA = new Date(a.dueDate.split('/').reverse().join('-'));
+        const dateB = new Date(b.dueDate.split('/').reverse().join('-'));
+        return dateA - dateB;
+    });
+}
+
+// Render tasks in sorted order
+function renderSortedTasks() {
+    // Clear all task lists
+    todoList.innerHTML = '';
+    progressList.innerHTML = '';
+    doneList.innerHTML = '';
+
+    // Sort and append tasks in the correct order
+    sortTasks();
+    tasks.forEach(task => {
+        const newItem = createTaskItem(task);
+        if (task.status === "Todo") {
+            todoList.appendChild(newItem);
+        } else if (task.status === "In progress") {
+            progressList.appendChild(newItem);
+        } else if (task.status === "Done") {
+            doneList.appendChild(newItem);
+        }
+    });
+
+    updateCounters(); // Update counters after sorting
+}
+
+// Initialize by rendering sorted tasks
+renderSortedTasks();
+
+
