@@ -13,21 +13,23 @@ This is a simple task management application built using JavaScript. It allows u
 
 ## Technologies Used
 - HTML
-- CSS
+- Tailwind css
 - JavaScript
 
 ## Getting Started
 To run the application locally, follow these steps:
 
+
 1. **Clone the Repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Youcode-Classe-E-2024-2025/anouar_elbarry-kanban.git
    cd task-management-app
 
-
-### Instructions for Use
-- Replace `<repository-url>` with the actual URL of your repository if you plan to host it on a platform like GitHub.
-- Add any other sections you find relevant, such as screenshots, further instructions, or acknowledgments.
-- You can save this content in a file named `README.md` in the root of your project directory. 
-
-If you need any changes or additional sections, just let me know!
+ - Open the Application: Open index.html in your web browser.
+2. **Usage**
+- Click on the "Add Task" button to open the modal for adding a new task.
+- Fill in the task details and click "Submit" to add the task to the list.
+- Hover over a task to see its description.
+- Change the status of a task using the dropdown menu.
+- Click on the pencil icon to edit a task and update its details.
+- Click on the trash icon to delete a task.
