@@ -73,6 +73,15 @@ li {
 .description {
     @apply text-nowrap overflow-hidden;
 }
+.p1_info {
+    @apply border-4 border-red-600
+}
+.p2_info {
+    @apply border-4 border-orange-400
+}
+.p3_info {
+    @apply border-4 border-green-400
+}
 /* Priority Level Borders */
 .priority-P1 {
     border-left: 4px solid #ff4d4f; /* (P1) */

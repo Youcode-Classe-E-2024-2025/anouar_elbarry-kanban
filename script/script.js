@@ -46,7 +46,7 @@ const tasks = [
         priority: "P2",
         status: "Done",
         dueDate: "01/23/2028",
-        description: "this is the description"
+        description: "this is the description this is the description this is the description this is the description this is the descriptionthis is the description"
     }
 ];
 
@@ -83,7 +83,7 @@ function createTaskItem(task) {
     newItem.classList.add("task-item", `priority-${task.priority}`);
     newItem.setAttribute("id", `task-${task.id}`);
     newItem.innerHTML = `
-        <h4>${task.title}</h4>
+        <div class="flex justify-between"> <h4>${task.title}</h4> <i data-id="${task.id}" class="fa-solid fa-info" style="color: #0041b3;"></i> </div> 
         <p class="description hidden">${task.description}</p>
         <div class="app_footer">
             <p id="date">${task.dueDate}</p>
@@ -263,3 +263,50 @@ document.getElementById('cancel_btn_update').addEventListener('click', () => {
     updateModal.classList.remove('flex');
     container.classList.remove('blur');
 });
+
+
+// task information
+const infoModal = document.querySelector('.information_modal');
+const titleInfo = document.getElementById('title_info');
+const descriptionInfo = document.getElementById('description_info');
+const dateInfo = document.getElementById('date_info');
+const statusInfo = document.getElementById('status_info');
+const taskInfo = document.querySelector('.info_task')
+container.addEventListener('click' , function(event) {
+    if(event.target.classList.contains('fa-info')){
+       infoModal.classList.remove('hidden');
+       infoModal.classList.add('flex');
+       container.classList.add('blur');
+
+       itemId = parseInt(event.target.dataset.id, 10);
+        const taskToShow = tasks.find(task => task.id === itemId);
+      
+        if(taskToShow){
+            titleInfo.textContent = taskToShow.title;
+            descriptionInfo.textContent = taskToShow.description;
+            dateInfo.textContent = taskToShow.dueDate;
+            statusInfo.textContent = taskToShow.status;
+
+           
+        }
+        if(taskToShow.priority === "P1"){
+            taskInfo.classList.add('p1_info')
+          }
+          else if(taskToShow.priority === "P2"){
+            taskInfo.classList.add('p2_info')
+          }
+          else{
+            taskInfo.classList.add('p3_info')
+          }
+
+
+    }
+});
+const xMark = document.querySelector('.fa-xmark');
+xMark.addEventListener('click', () => {
+    infoModal.classList.add('hidden');
+       infoModal.classList.remove('flex');
+       container.classList.remove('blur');
+
+       taskInfo.classList.remove('p1_info', 'p2_info', 'p3_info');
+})
