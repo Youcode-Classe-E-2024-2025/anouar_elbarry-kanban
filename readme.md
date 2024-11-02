@@ -1,35 +1,37 @@
-# Task Management Application
 
-## Description
-This is a simple task management application built using JavaScript. It allows users to add, update, delete, and sort tasks based on their status and priority. The application provides a user-friendly interface for managing tasks and keeping track of their status (Todo, In progress, Done).
+# Kanban Task Management Application
+
+## Overview
+This is a simple Kanban task management application built with  JavaScript, HTML, and tailwind css. The application allows users to manage tasks efficiently by categorizing them into three different columns: Todo, In Progress, and Done. It features functionality for adding, editing, deleting, and viewing task details.
 
 ## Features
-- Add new tasks with details such as title, description, priority, due date, and status.
-- Edit existing tasks to update their description, priority, and due date.
-- Delete tasks from the list.
-- Sort tasks based on priority and due date.
-- Responsive UI with modals for adding and updating tasks.
-- Display of task details in an information modal.
+- Add new tasks with title, description, priority, status, and due date.
+- Edit existing tasks to update their priority, due date, and description.
+- Delete tasks easily.
+- Sort tasks automatically based on priority and due date.
+- View task details in a modal.
+- Responsive design for usability on different screen sizes.
 
 ## Technologies Used
 - HTML
-- Tailwind css
+- Tailwind CSS
 - JavaScript
 
 ## Getting Started
-To run the application locally, follow these steps:
 
+### Installation
+1. Clone the repository or download the files.
+2. Open `index.html` in your web browser.
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Youcode-Classe-E-2024-2025/anouar_elbarry-kanban.git
-   cd task-management-app
+### Usage
+1. Click the "Add Task" button to open the modal and fill in the task details.
+2. Click "Submit" to add the task to the Todo list.
+3. Use the status dropdown to move tasks between Todo, In Progress, and Done.
+4. Hover over tasks to view their description.
+5. Click the edit icon to update a task or the delete icon to remove it.
 
- - Open the Application: Open index.html in your web browser.
-2. **Usage**
-- Click on the "Add Task" button to open the modal for adding a new task.
-- Fill in the task details and click "Submit" to add the task to the list.
-- Hover over a task to see its description.
-- Change the status of a task using the dropdown menu.
-- Click on the pencil icon to edit a task and update its details.
-- Click on the trash icon to delete a task.
+## Live Demo
+You can view the live application at: [Kanban Task Management App](https://anouarelbarry-kanban.vercel.app/)
+
+## Contributing
+Contributions are welcome! Feel free to submit a pull request or create an issue for any improvements or bug fixes.
